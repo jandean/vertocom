@@ -83,3 +83,22 @@ defined('EXIT_USER_INPUT')     OR define('EXIT_USER_INPUT', 7); // invalid user 
 defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
+
+
+
+define('CONTENT_SERVICE_STRS', 'Services');
+define('CONTENT_PRODUCT_STRS', 'Products');
+define('CONTENT_SERVICE_STR', 'service');
+define('CONTENT_PRODUCT_STR', 'product');
+define('CONTENT_SERVICE', 1);
+define('CONTENT_PRODUCT', 2);
+
+define('PAGE_CONTACT', 1);
+define('PAGE_TERMS', 2);
+define('PAGE_POLICY', 3);
+define('PAGE_CAROUSEL', 4);
+
+define('PAGE_SUBHEADER_SERVICE', 5);
+define('PAGE_SUBHEADER_PRODUCT', 6);
+define('PAGE_SUBFOOTER_SERVICE', 7);
+define('PAGE_SUBFOOTER_PRODUCT', 8);
