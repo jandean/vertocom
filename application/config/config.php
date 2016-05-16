@@ -30,6 +30,7 @@ function get_base_url()
     return $base[0];
 }
 $config['base_url'] = 'http://'.$_SERVER['SERVER_NAME'].'/verto';
+$config['assets_url'] = 'http://'.$_SERVER['SERVER_NAME'].'/verto/assets';
 
 /*
 |--------------------------------------------------------------------------
@@ -517,3 +518,6 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
+
+
+$config['image_upload_path'] = '/assets/images/uploads/';

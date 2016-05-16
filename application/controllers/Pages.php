@@ -14,20 +14,39 @@ class Pages extends CI_Controller {
         $this->load->model(array('pages_model', 'carousel_model'));
     }
 
-    public function contact()
+    public function home()
     {
         $this->form_validation->set_rules('page_type', 'Page Type', 'trim');
         $this->form_validation->set_rules('content', 'Content', 'trim|required');
 
-        $this->data['title']        = "Contact Us";
-        $this->data['type']         = "contact";
-        $this->data['result']       = $this->pages_model->get_entries()->row();
-        $this->data['sidemenu']     = $this->load->view('admin/sidemenu', array('page' => 'pages', 'active' => 'contact'), true);
+        $this->data['title']        = "Home Page Intro";
+        $this->data['type']         = "home";
+        $this->data['result']       = $this->pages_model->get_entries(PAGE_HOME)->row();
+        $this->data['sidemenu']     = $this->load->view('admin/sidemenu', array('page' => 'pages', 'active' => 'home'), true);
         $this->data['page']         = "admin/pages-form";
 
         if ($this->form_validation->run() == true) :
-            $this->pages_model->update_entry();
-            redirect('pages/contact', 'refresh');
+            if (!empty($_FILES['image']['name'])) :
+                $image_ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+                $config['upload_path']      = FCPATH . $this->config->item('image_upload_path');
+                $config['allowed_types']    = 'gif|jpg|jpeg|png';
+                $config['overwrite']        = TRUE;
+                $config['file_name']        = 'homepage.' . $image_ext;
+                $this->load->library('upload', $config);
+
+                if (!$this->upload->do_upload('image')) :
+                    $this->data['message'] = $this->upload->display_errors();
+                    $this->load->view('admin/template', $this->data);
+                    return false;
+                endif;
+
+                $this->pages_model->image = $config['file_name'];
+            else:
+                $this->pages_model->image = $this->data['result']->image;
+            endif;
+
+            $this->pages_model->update_entry(PAGE_HOME);
+            redirect('pages/home', 'refresh');
         else :
             //set the flash data error message if there is one
             $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
@@ -35,20 +54,39 @@ class Pages extends CI_Controller {
         endif;
     }
 
-    public function terms()
+    public function product()
     {
         $this->form_validation->set_rules('page_type', 'Page Type', 'trim');
         $this->form_validation->set_rules('content', 'Content', 'trim|required');
 
-        $this->data['title']        = "Terms of Use";
-        $this->data['type']         = "terms";
-        $this->data['result']       = $this->pages_model->get_entries(PAGE_TERMS)->row();
-        $this->data['sidemenu']     = $this->load->view('admin/sidemenu', array('page' => 'pages', 'active' => 'terms'), true);
+        $this->data['title']        = "Product Page Intro";
+        $this->data['type']         = "product";
+        $this->data['result']       = $this->pages_model->get_entries(PAGE_PRODUCT)->row();
+        $this->data['sidemenu']     = $this->load->view('admin/sidemenu', array('page' => 'pages', 'active' => 'product'), true);
         $this->data['page']         = "admin/pages-form";
 
         if ($this->form_validation->run() == true) :
-            $this->pages_model->update_entry(PAGE_TERMS);
-            redirect('pages/terms', 'refresh');
+            if (!empty($_FILES['image']['name'])) :
+                $image_ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+                $config['upload_path']      = FCPATH . $this->config->item('image_upload_path');
+                $config['allowed_types']    = 'gif|jpg|jpeg|png';
+                $config['overwrite']        = TRUE;
+                $config['file_name']        = 'productpage.' . $image_ext;
+                $this->load->library('upload', $config);
+
+                if (!$this->upload->do_upload('image')) :
+                    $this->data['message'] = $this->upload->display_errors();
+                    $this->load->view('admin/template', $this->data);
+                    return false;
+                endif;
+
+                $this->pages_model->image = $config['file_name'];
+            else:
+                $this->pages_model->image = $this->data['result']->image;
+            endif;
+
+            $this->pages_model->update_entry(PAGE_PRODUCT);
+            redirect('pages/product', 'refresh');
         else :
             //set the flash data error message if there is one
             $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
@@ -56,20 +94,39 @@ class Pages extends CI_Controller {
         endif;
     }
 
-    public function policy()
+    public function service()
     {
         $this->form_validation->set_rules('page_type', 'Page Type', 'trim');
         $this->form_validation->set_rules('content', 'Content', 'trim|required');
 
-        $this->data['title']        = "Privacy Policy";
-        $this->data['type']         = "policy";
-        $this->data['result']       = $this->pages_model->get_entries(PAGE_POLICY)->row();
-        $this->data['sidemenu']     = $this->load->view('admin/sidemenu', array('page' => 'pages', 'active' => 'policy'), true);
+        $this->data['title']        = "Service Page Intro";
+        $this->data['type']         = "service";
+        $this->data['result']       = $this->pages_model->get_entries(PAGE_SERVICE)->row();
+        $this->data['sidemenu']     = $this->load->view('admin/sidemenu', array('page' => 'pages', 'active' => 'service'), true);
         $this->data['page']         = "admin/pages-form";
 
         if ($this->form_validation->run() == true) :
-            $this->pages_model->update_entry(PAGE_POLICY);
-            redirect('pages/policy', 'refresh');
+            if (!empty($_FILES['image']['name'])) :
+                $image_ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+                $config['upload_path']      = FCPATH . $this->config->item('image_upload_path');
+                $config['allowed_types']    = 'gif|jpg|jpeg|png';
+                $config['overwrite']        = TRUE;
+                $config['file_name']        = 'servicepage.' . $image_ext;
+                $this->load->library('upload', $config);
+
+                if (!$this->upload->do_upload('image')) :
+                    $this->data['message'] = $this->upload->display_errors();
+                    $this->load->view('admin/template', $this->data);
+                    return false;
+                endif;
+
+                $this->pages_model->image = $config['file_name'];
+            else:
+                $this->pages_model->image = $this->data['result']->image;
+            endif;
+
+            $this->pages_model->update_entry(PAGE_SERVICE);
+            redirect('pages/service', 'refresh');
         else :
             //set the flash data error message if there is one
             $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
@@ -88,6 +145,7 @@ class Pages extends CI_Controller {
         $config['uri_segment']  = 4;
         $this->pagination->initialize($config);
 
+        $this->data['title']        = "Call Center Image Management";
         $this->data['links']        = $this->pagination->create_links();
         $this->data['recordset']    = $this->carousel_model->get_entries()->result();
         $this->data['sidemenu']     = $this->load->view('admin/sidemenu', array('page' => 'features', 'active' => 'carousel'), true);
@@ -116,7 +174,7 @@ class Pages extends CI_Controller {
 
             if (is_null($id) || !empty($_FILES['image']['name'])) :
                 //$image_ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-                $config['upload_path']      = FCPATH . '/assets/images/uploads/';
+                $config['upload_path']      = FCPATH . $this->config->item('image_upload_path');
                 $config['allowed_types']    = 'gif|jpg|jpeg|png';
                 $config['overwrite']        = TRUE;
                 $config['file_name']        = 'carousel-' . str_replace(' ', '-', $_FILES['image']['name']);

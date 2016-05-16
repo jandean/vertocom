@@ -1,12 +1,22 @@
-<section class="main row">
+<div class="area">
+      <div class="section">
+        <div class="content content-title">
+          <div class="wrapper">  
+            <div class="row">
+              <div class="col-xs-12">
+                <h1><?php echo $title; ?></h1>
+              </div><!-- .col-xs-12 -->                
+            </div><!-- .row -->
+          </div><!-- .wrapper -->        
+        </div><!-- .content -->
+      </div><!-- .section -->
     <?php echo $sidemenu; ?>
-    <div class="core small-10 columns">
-        <h3>Image Carousel</h3>
-        <hr>
-        <table class="auto">
-            <thead>
+    
+    <div class="content content-table">
+          <div class="wrapper">
+            <table>
+              <thead>
                 <tr>
-                    <!-- <th width="30"><input type="checkbox"></input></th> -->
                     <th width="50">ID</th>
                     <th>Image</th>
                     <th>Link</th>
@@ -22,8 +32,8 @@
                         <td><img src="<?php echo base_url('assets/images/uploads/' . $row->img); ?>" width="80"></td>
                         <td><?php echo $row->url; ?></td>
                         <td>
-                            <a href="<?php echo base_url('pages/carousel_form/' . $row->id); ?>" class="button tiny radius edit-cat">Edit</a>
-                            <a href="" class="button tiny radius warning delete" data-reveal-id="delete-prompt">Delete</a>
+                            <a class="btn btn-default btn-xs" href="<?php echo base_url('pages/carousel_form/' . $row->id); ?>">Edit</a>
+                            <a class="btn btn-danger btn-xs delete" href="" data-reveal-id="delete-prompt">Delete</a>
                         </td>
                     </tr>
                     <?php endforeach; ?>
@@ -34,13 +44,12 @@
                 <?php endif; ?>
             </tbody>
         </table>
-        <div class="pagination-centered">
-            <ul class="pagination">
-                <?php echo $links; ?>
-            </ul>
-        </div>
-    </div>
+            <hr>
+          </div>
+        </div><!-- .content -->
 
-</section>
+      </div><!-- .section -->
+
+    </div><!-- .area -->
 
 <?php $data = array('controller' => 'pages', 'function' => 'delete', 'goto' => 'pages/carousel'); $this->load->view('admin/modal-delete', $data); ?>

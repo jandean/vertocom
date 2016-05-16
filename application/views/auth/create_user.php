@@ -1,57 +1,89 @@
-<h1><?php echo lang('create_user_heading');?></h1>
-<p><?php echo lang('create_user_subheading');?></p>
+<div class="area">
+      <div class="section">
+        <div class="content content-title">
+          <div class="wrapper">  
+            <div class="row">
+              <div class="col-xs-12">
+                <h1><?php echo $title; ?></h1>
+              </div><!-- .col-xs-12 -->                
+            </div><!-- .row -->
+          </div><!-- .wrapper -->        
+        </div><!-- .content -->
+      </div><!-- .section -->
+    <div class="section">
 
-<div id="infoMessage"><?php echo $message;?></div>
+    <div class="content">
+    <div class="wrapper">
+      <?php echo $message; ?>
 
-<?php echo form_open("auth/create_user");?>
+      <fieldset id="section-formsbasic">
+        <?php echo form_open("auth/create_user");?>
+          <div class="row">
+            <div class="col-xs-6">
+              <div class="form-group">
+                <label class="control-label" for="#"><?php echo lang('create_user_fname_label', 'first_name');?></label>
+                <?php echo form_input($first_name);?>
+              </div>
+            </div>
 
-      <p>
-            <?php echo lang('create_user_fname_label', 'first_name');?> <br />
-            <?php echo form_input($first_name);?>
-      </p>
+            <div class="col-xs-6">
+              <div class="form-group">
+                  <label class="control-label" for="#"><?php echo lang('create_user_lname_label', 'last_name');?></label>
+                    <?php echo form_input($last_name);?>
+              </div>
+            </div>
+          </div>
 
-      <p>
-            <?php echo lang('create_user_lname_label', 'last_name');?> <br />
-            <?php echo form_input($last_name);?>
-      </p>
-      
-      <?php
-      if($identity_column!=='email') {
-          echo '<p>';
-          echo lang('create_user_identity_label', 'identity');
-          echo '<br />';
-          echo form_error('identity');
-          echo form_input($identity);
-          echo '</p>';
-      }
-      ?>
+            <?php
+            if($identity_column!=='email') {
+                echo '<div class="form-group"><label class="control-label" for="#">';
+                echo lang('create_user_identity_label', 'identity');
+                echo '</label>';
+                echo form_error('identity');
+                echo form_input($identity);
+                echo '</div>';
+            }
+            ?>
 
-      <p>
-            <?php echo lang('create_user_company_label', 'company');?> <br />
-            <?php echo form_input($company);?>
-      </p>
+          <div class="row">
+            <div class="col-xs-6">
+              <div class="form-group">
+                  <label class="control-label" for="#"><?php echo lang('create_user_email_label', 'email');?></label>
+                    <?php echo form_input($email);?>
+              </div>
+            </div>
 
-      <p>
-            <?php echo lang('create_user_email_label', 'email');?> <br />
-            <?php echo form_input($email);?>
-      </p>
+            <div class="col-xs-6">
+              <div class="form-group">
+                  <label class="control-label" for="#"><?php echo lang('create_user_phone_label', 'phone');?></label>
+                    <?php echo form_input($phone);?>
+              </div>
+            </div>
+          </div>
 
-      <p>
-            <?php echo lang('create_user_phone_label', 'phone');?> <br />
-            <?php echo form_input($phone);?>
-      </p>
+          <div class="row">
+            <div class="col-xs-6">
+              <div class="form-group">
+                  <label class="control-label" for="#"><?php echo lang('create_user_password_label', 'password');?></label>
+                    <?php echo form_input($password);?>
+              </div>
+            </div>
 
-      <p>
-            <?php echo lang('create_user_password_label', 'password');?> <br />
-            <?php echo form_input($password);?>
-      </p>
-
-      <p>
-            <?php echo lang('create_user_password_confirm_label', 'password_confirm');?> <br />
-            <?php echo form_input($password_confirm);?>
-      </p>
+            <div class="col-xs-6">
+              <div class="form-group">
+                  <label class="control-label" for="#"><?php echo lang('create_user_password_confirm_label', 'password_confirm');?></label>
+                    <?php echo form_input($password_confirm);?>
+              </div>
+            </div>
+          </div>
 
 
-      <p><?php echo form_submit('submit', lang('create_user_submit_btn'));?></p>
+            <hr>
+              <button class="btn btn-success" type="submit">ADD</button>
+              <a class="btn btn-default" href="<?php echo base_url('auth'); ?>">CANCEL</a>
 
-<?php echo form_close();?>
+        <?php echo form_close();?>
+      </fieldset>
+
+    </div><!-- .wrapper -->          
+  </div>

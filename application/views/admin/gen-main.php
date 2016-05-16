@@ -1,22 +1,32 @@
-<section class="main row">
+<div class="area">
+      <div class="section">
+        <div class="content content-title">
+          <div class="wrapper">  
+            <div class="row">
+              <div class="col-xs-12">
+                <h1><?php echo $title; ?></h1>
+              </div><!-- .col-xs-12 -->                
+            </div><!-- .row -->
+          </div><!-- .wrapper -->        
+        </div><!-- .content -->
+      </div><!-- .section -->
     <?php echo $sidemenu; ?>
-    <div class="core small-10 columns">
-        <h3><?php echo $title; ?></h3>
-        <!-- <a href="<?php echo base_url('admin/form/' . $content_type ); ?>" class="button tiny radius add-cat">Add <?php echo ucfirst($content_type); ?></a> -->
-        <hr>
-        <table class="auto">
-            <thead>
+
+    <div class="content content-table">
+          <div class="wrapper">
+            <table>
+              <thead>
                 <tr>
-                    <!-- <th width="30"><input type="checkbox"></input></th> -->
-                    <th width="50">ID</th>
+                    <th>ID</th>
                     <th>Image</th>
                     <th>Title</th>
                     <th>Active</th>
                     <th>Featured</th>
-                    <th width="250">Actions</th>
+                    <th>Action</th>
                 </tr>
-            </thead>
-            <tbody>
+              </thead>
+              <tbody>
+
                 <?php if ($recordset) : ?>
                     <?php foreach ($recordset as $row) : ?>
                     <tr>
@@ -27,8 +37,19 @@
                         <td><?php echo $row->is_active == 1 ? 'Yes' : 'No'; ?></td>
                         <td><?php echo $row->is_featured == 1 ? 'Yes' : 'No'; ?></td>
                         <td>
-                            <a href="<?php echo base_url('admin/form/' . $content_type . '/' . $row->id); ?>" class="button tiny radius edit-cat">Edit</a>
-                            <a href="" class="button tiny radius warning delete" data-reveal-id="delete-prompt">Delete</a>
+                            <a class="btn btn-default btn-xs" href="<?php echo base_url('admin/form/' . $content_type . '/' . $row->id); ?>">Edit</a>
+
+                            <?php if ($row->is_active) : ?>
+                            <a class="btn btn-danger btn-xs" href="<?php echo base_url('admin/status_update/deactivate/'.$row->id.'/'.$content_type); ?>">Deactivate</a>
+                            <?php else: ?>
+                            <a class="btn btn-success btn-xs" href="<?php echo base_url('admin/status_update/activate/'.$row->id.'/'.$content_type); ?>">Activate</a>
+                            <?php endif; ?>
+
+                            <?php if ($row->is_featured) : ?>
+                            <a class="btn btn-danger btn-xs" href="<?php echo base_url('admin/status_update/unfeature/'.$row->id.'/'.$content_type); ?>">Unfeature</a>
+                            <?php else: ?>
+                            <a class="btn btn-success btn-xs" href="<?php echo base_url('admin/status_update/feature/'.$row->id.'/'.$content_type); ?>">Feature</a>
+                            <?php endif; ?>
                         </td>
                     </tr>
                     <?php endforeach; ?>
@@ -39,13 +60,10 @@
                 <?php endif; ?>
             </tbody>
         </table>
-        <div class="pagination-centered">
-            <ul class="pagination">
-                <?php echo $links; ?>
-            </ul>
-        </div>
-    </div>
+            <hr>
+          </div>
+        </div><!-- .content -->
 
-</section>
+      </div><!-- .section -->
 
-<?php $data = array('controller' => 'admin', 'function' => 'delete', 'goto' => 'admin/main/' . $content_type); $this->load->view('admin/modal-delete', $data); ?>
+    </div><!-- .area -->

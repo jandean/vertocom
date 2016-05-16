@@ -41,7 +41,7 @@ table tbody th, table thead th, table tfoot th {
   color: #004ba5;
 }
 
-/* line 41, ../scss/diversityabroad-admin.scss */
+/* line 41, ../scss/diversityabroad-admin.scss *
 .reveal-modal-bg {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
@@ -57,7 +57,7 @@ table tbody th, table thead th, table tfoot th {
   padding: 0;
 }
 
-/* line 55, ../scss/diversityabroad-admin.scss */
+/* line 55, ../scss/diversityabroad-admin.scss *
 .reveal-modal {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -74,36 +74,36 @@ table tbody th, table thead th, table tfoot th {
   z-index: 2001;
   padding: 20px;
 }
-/* line 66, ../scss/diversityabroad-admin.scss */
+/* line 66, ../scss/diversityabroad-admin.scss *
 .reveal-modal h3 {
   margin: 10px 0;
 }
 
-/* line 69, ../scss/diversityabroad-admin.scss */
+/* line 69, ../scss/diversityabroad-admin.scss *
 .reveal-modal.small {
   width: 200px;
   margin-left: -100px;
 }
 
-/* line 70, ../scss/diversityabroad-admin.scss */
+/* line 70, ../scss/diversityabroad-admin.scss *
 .reveal-modal.medium {
   width: 400px;
   margin-left: -200px;
 }
 
-/* line 71, ../scss/diversityabroad-admin.scss */
+/* line 71, ../scss/diversityabroad-admin.scss *
 .reveal-modal.large {
   width: 600px;
   margin-left: -300px;
 }
 
-/* line 72, ../scss/diversityabroad-admin.scss */
+/* line 72, ../scss/diversityabroad-admin.scss *
 .reveal-modal.xlarge {
   width: 800px;
   margin-left: -400px;
 }
 
-/* line 74, ../scss/diversityabroad-admin.scss */
+/* line 74, ../scss/diversityabroad-admin.scss *
 a.close-reveal-modal {
   font-size: 2em;
   padding: 0 10px;

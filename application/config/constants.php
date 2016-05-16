@@ -93,9 +93,9 @@ define('CONTENT_PRODUCT_STR', 'product');
 define('CONTENT_SERVICE', 1);
 define('CONTENT_PRODUCT', 2);
 
-define('PAGE_CONTACT', 1);
-define('PAGE_TERMS', 2);
-define('PAGE_POLICY', 3);
+define('PAGE_HOME', 1);
+define('PAGE_PRODUCT', 2);
+define('PAGE_SERVICE', 3);
 define('PAGE_CAROUSEL', 4);
 
 define('PAGE_SUBHEADER_SERVICE', 5);

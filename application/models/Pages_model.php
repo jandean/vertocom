@@ -4,6 +4,7 @@ class Pages_model extends CI_Model {
 
     var $type           = '';
     var $content        = '';
+    var $image          = '';
     var $date_updated   = '';
 
     function __construct()
@@ -12,7 +13,7 @@ class Pages_model extends CI_Model {
         parent::__construct();
     }
     
-    function get_entries($type = PAGE_CONTACT)
+    function get_entries($type = PAGE_PRODUCT)
     {
         if (is_array($type))
             $this->db->where_in('type', $type);

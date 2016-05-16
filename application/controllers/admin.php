@@ -34,7 +34,7 @@ class Admin extends CI_Controller {
         $this->data['content_type'] = $content_type;
         $this->data['title']        = ucfirst($content_type) . " Management";
         $this->data['links']        = $this->pagination->create_links();
-        $this->data['recordset']    = $this->article_model->get_entries($type, null, $limit, $offset)->result();
+        $this->data['recordset']    = $this->article_model->get_entries($type, null, $limit, $offset, null, null)->result();
         $this->data['sidemenu']     = $this->load->view('admin/sidemenu', array('page' => $content_type, 'active' => 'main'), true);
         $this->data['page']         = "admin/gen-main";
         $this->load->view('admin/template', $this->data);
@@ -79,10 +79,9 @@ class Admin extends CI_Controller {
 
         if ($this->form_validation->run() == true) :
 
-        	print_r('Validation True');
             if (is_null($id) || !empty($_FILES['image']['name'])) :
                 $image_ext = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
-                $config['upload_path']      = FCPATH . '/assets/images/uploads/';
+                $config['upload_path']      = FCPATH . $this->config->item('image_upload_path');
                 $config['allowed_types']    = 'gif|jpg|jpeg|png';
                 $config['overwrite']        = TRUE;
                 $config['file_name']        = $content_type . '-' . $this->input->post('slug') . '.' . $image_ext;
@@ -106,7 +105,6 @@ class Admin extends CI_Controller {
 
             redirect('admin/main/' . $content_type, 'refresh');
         else :
-        	print_r('Validation False');
             //set the flash data error message if there is one
             $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
             $this->load->view('admin/template', $this->data);
@@ -118,5 +116,34 @@ class Admin extends CI_Controller {
         $this->article_model->remove_entry();
         $msg = 'Successfully removed data.';
         echo json_encode(array('st' => 1, 'msg' => $msg));
+    }
+
+    public function status_update($action, $id, $page)
+    {
+        $id = (int) $id;
+        switch ($action) {
+            case 'deactivate':
+                $field = 'is_active';
+                $value = 0;
+                break;
+
+            case 'feature':
+                $field = 'is_featured';
+                $value = 1;
+                break;
+
+            case 'unfeature':
+                $field = 'is_featured';
+                $value = 0;
+                break;
+            
+            default:
+                $field = 'is_active';
+                $value = 1;
+                break;
+        }
+
+        $this->article_model->status_update($field, $value, $id);
+        redirect("admin/main/".$page, 'refresh');
     }
 }

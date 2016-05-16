@@ -1,4 +1,4 @@
-<div id="delete-prompt" class="reveal-modal text-center small" data-reveal>
+<div id="delete-prompt" class="reveal-modal" data-reveal>
   <h3>Are you sure you want to delete this?</h2>
   <hr>
   <div id="infoMessageDelete"></div>
